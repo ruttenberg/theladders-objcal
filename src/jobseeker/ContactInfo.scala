@@ -4,5 +4,5 @@ import theLadders.{Printer, Printable}
 
 class ContactInfo (val theInfo: String) extends Printable
 {
-  def print(aPrinter: Printer) = {}
+  override def print(aPrinter: Printer) = {}
 }

@@ -9,7 +9,7 @@ package theLadders
  */
 trait Identity extends Printable
 {
-  def print(thePrinter: Printer) =
+  override def print(thePrinter: Printer) =
   {
     thePrinter.printItem(this)
   }

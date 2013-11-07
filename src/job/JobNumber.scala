@@ -10,7 +10,7 @@ import theLadders.{Printer, Printable}
  * To change this template use File | Settings | File Templates.
  */
 class JobNumber(theJobNumber: Int) extends Printable {
-  def print(aPrinter: Printer) =
+  override def print(aPrinter: Printer) =
   {
     aPrinter.printItem(this)
   }

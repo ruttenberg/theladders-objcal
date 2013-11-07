@@ -9,15 +9,22 @@ import theLadders.{Printer, Printable}
  * Time: 11:08 AM
  * To change this template use File | Settings | File Templates.
  */
-class JobTitle(aTitle: String) extends Printable
+class JobTitle(val theTitle: String) extends Printable
 {
-  def print(aPrinter: Printer) =
+  override def print(aPrinter: Printer) =
   {
     aPrinter.printItem(this)
   }
 
+  override def equals(other: Any) =
+  {
+    val that = other.asInstanceOf[JobTitle]
+    if (that == null) false
+    else that.theTitle  == theTitle
+  }
+
   override def toString() =
   {
-    aTitle.toString()
+    theTitle.toString()
   }
 }

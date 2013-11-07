@@ -10,7 +10,6 @@ import theLadders.TheLaddersData
  * Time: 10:07 AM
  * To change this template use File | Settings | File Templates.
  */
-abstract class Employer {
-  val theEmployerID: EmployerID
-  val theEmployerInfo: EmployerInfo
+class Employer (val theEmployerID: EmployerID, val theEmployerInfo: EmployerInfo)
+{
 }

@@ -1,5 +1,10 @@
 package job
 
+import jobseeker.{Jobseeker, JobseekerID}
+import application.{JReqApplication, ApplicationID, Application}
+import application.day._
+import resume.Resume
+
 /**
  * Created with IntelliJ IDEA.
  * User: jpr
@@ -7,7 +12,13 @@ package job
  * Time: 12:00 PM
  * To change this template use File | Settings | File Templates.
  */
-abstract class JReq extends Job
+class JReq (val theJobID: JobID) extends Job
 {
+  def createApplication(aJobseeker: Jobseeker, aResume: Resume) : Application =
+  {
+    val anApplicationID: ApplicationID = new ApplicationID(theJobID, aJobseeker)
+    val today: Day = new Today
+    new JReqApplication(anApplicationID, today, aResume)
+  }
 
 }

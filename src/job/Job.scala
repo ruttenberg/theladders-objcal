@@ -2,6 +2,8 @@ package job
 
 import theLadders.{Printer, Printable}
 import employer.EmployerID
+import jobseeker.JobseekerID
+import resume.Resume
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +19,7 @@ trait Job extends Printable
 
 //  def Job(aJobID: JobID)
 
-  def print(thePrinter: Printer) =
+  override def print(thePrinter: Printer) =
   {
     theJobID.print(thePrinter)
   }
@@ -26,4 +28,7 @@ trait Job extends Printable
   {
     theJobID.matchesEmployer(anEmployerID)
   }
+
+//  def createApplication(aJobseekerID: JobseekerID, aResume: Resume)
+//  def createApplication(aJobseekerID: JobseekerID)
 }

@@ -14,7 +14,7 @@ class Jobs extends Printable
 {
   var theJobs: List[Job] = List()
 
-  def print(aPrinter: Printer) =
+  override def print(aPrinter: Printer) =
   {
     aPrinter.printList(theJobs, "\n")
   }
@@ -29,5 +29,11 @@ class Jobs extends Printable
     val findJobByEmployer = predicate.jobByEmployerIDPredicate(anEmployerID)
 
     theJobs.filter(findJobByEmployer)
+  }
+
+  def findByJobID(aJobID: JobID) =
+  {
+    val findJobByJobID = predicate.jobByJobIDPredicate(aJobID)
+    theJobs.filter(findJobByJobID).head
   }
 }

@@ -9,5 +9,8 @@ package theLadders
  */
 trait Printable
 {
-  def print(thePrinter: Printer)
+  def print(aPrinter: Printer) =
+  {
+    aPrinter.printItem(this)
+  }
 }

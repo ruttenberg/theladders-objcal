@@ -4,6 +4,8 @@ import theLadders.{TheLaddersData, EmailAddress, ConsolePrinter, PrintableString
 import employer.EmployerID
 import job._
 import jobseeker._
+import application.day.Today
+import application.Application
 
 /**
  * Created with IntelliJ IDEA.
@@ -110,8 +112,36 @@ object HelloWorld extends App {
 
     println("print saved jobs for: " + seekerID.toString())
     seeker.printSavedJobs(pr)
-    seekerInfo.printSavedJobs(pr)
-
     println(); println()
+
+    val localJobs = new Jobs
+    localJobs.add(job)
+    localJobs.add(job2)
+    localJobs.add(job3)
+    print("find Job for JobID: "); jobID2.print(pr); println()
+    localJobs.findByJobID(jobID2).print(pr)
+    println(); println()
+
+    println("Today: " + new Today)
+    println(); println()
+
+    val d1 = new Today
+    val d2 = new Today
+    println("d1 == d2: " + (d1 == d2))
+    println(); println()
+
+    print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID3.print(pr); println("'")
+    theLaddersData.applyToATS(jobID3, seeker)
+    println(); println()
+
+    print("Jobseeker '" + seekerID + "'");  println("' has applied to these Jobs:")
+    seeker.printJobsAppliedTo(pr)
+    println(); println()
+
+    val ATS2: ATS = job2.asInstanceOf[ATS]
+    val freeApp: Application = ATS2.createApplication(seeker)
+
+    print("Application by '"); seeker.print(pr); print("' to Job '"); ATS2.print(pr); println("'");
+    freeApp.print(pr); println
   }
 }

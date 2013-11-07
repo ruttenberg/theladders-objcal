@@ -8,7 +8,7 @@ package theLadders
  * To change this template use File | Settings | File Templates.
  */
 class PrintableString ( val theString: String  ) extends Printable {
-  def print(thePrinter: Printer) =
+  override def print(thePrinter: Printer) =
   {
     thePrinter.printItem(this)
   }

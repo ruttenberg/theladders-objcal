@@ -4,7 +4,7 @@ import theLadders.{Identity, Printer, Printable}
 
 class JobseekerID (theIdentity: Identity) extends Printable
 {
-  def print(aPrinter: Printer) =
+  override def print(aPrinter: Printer) =
   {
     theIdentity.print(aPrinter)
   }

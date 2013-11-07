@@ -9,8 +9,9 @@ import theLadders.{Printer, Identity, Printable}
  * Time: 10:14 AM
  * To change this template use File | Settings | File Templates.
  */
-class EmployerID(val theIdentity: Identity) extends Printable {
-  def print(aPrinter: Printer) =
+class EmployerID(val theIdentity: Identity) extends Printable
+{
+  override def print(aPrinter: Printer) =
   {
     aPrinter.printItem(theIdentity)
   }

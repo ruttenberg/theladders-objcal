@@ -12,7 +12,7 @@ import theLadders.{Printable, Printer}
  */
 class JobID ( val theEmployerID: EmployerID, val theJobNumber: JobNumber, val theJobTitle: JobTitle ) extends Printable
 {
-  def print(aPrinter: Printer) =
+  override def print(aPrinter: Printer) =
   {
     val printList: List[Printable] =  List(theEmployerID, theJobTitle, theJobNumber)
     aPrinter.printList(printList, '\t'.toString())
@@ -21,5 +21,13 @@ class JobID ( val theEmployerID: EmployerID, val theJobNumber: JobNumber, val th
   def matchesEmployer(anEmployerID: EmployerID) =
   {
     anEmployerID == theEmployerID
+  }
+
+  override def equals(other: Any) =
+  {
+    val that = other.asInstanceOf[JobID]
+    if (that == null) false
+    else
+      that.theEmployerID == theEmployerID && that.theJobNumber == theJobNumber && that.theJobTitle == theJobTitle
   }
 }

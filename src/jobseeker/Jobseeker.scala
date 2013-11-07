@@ -5,7 +5,7 @@ import job.{Job, JobID}
 
 class Jobseeker (val theJobseekerID: JobseekerID, val theJobseekerInfo: JobseekerInfo) extends Printable
 {
-  def print(aPrinter: Printer) =
+  override def print(aPrinter: Printer) =
   {
     theJobseekerID.print(aPrinter)
   }
@@ -18,5 +18,15 @@ class Jobseeker (val theJobseekerID: JobseekerID, val theJobseekerInfo: Jobseeke
   def printSavedJobs(aPrinter: Printer) =
   {
     theJobseekerInfo.printSavedJobs(aPrinter)
+  }
+
+  def noteJobApplication(jobThatHasBeenAppliedTo: Job) =
+  {
+    theJobseekerInfo.noteJobApplication(jobThatHasBeenAppliedTo)
+  }
+
+  def printJobsAppliedTo(aPrinter: Printer) =
+  {
+    theJobseekerInfo.printJobsAppliedTo(aPrinter)
   }
 }
