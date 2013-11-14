@@ -12,6 +12,11 @@ class ApplicationID (val theJobID: JobID, val theJobseeker: Jobseeker) extends P
     theJobID.matchesEmployer(anEmployerID)
   }
 
+  def isForThisJob(aJobID: JobID) =
+  {
+    theJobID == aJobID
+  }
+
   override def print(aPrinter: Printer) =
   {
     aPrinter.printList(List(theJobID, theJobseeker), '\t'.toString())

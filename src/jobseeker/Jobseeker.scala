@@ -7,7 +7,7 @@ class Jobseeker (val theJobseekerID: JobseekerID, val theJobseekerInfo: Jobseeke
 {
   override def print(aPrinter: Printer) =
   {
-    theJobseekerID.print(aPrinter)
+    aPrinter.printList(List(theJobseekerInfo, theJobseekerID), '\t'.toString())
   }
 
   def saveJob(aJob: Job) =

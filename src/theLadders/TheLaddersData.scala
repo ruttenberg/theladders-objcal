@@ -6,6 +6,7 @@ import application.Applications
 import application.Application
 import jobseeker.{Jobseeker, JobseekerID}
 import resume.Resume
+import application.day.Day
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,12 +32,29 @@ class TheLaddersData
     aPrinter.printList(jobsForThisEmployer, "\n")
   }
 
+  def printApplicationsForJob(aPrinter: Printer, aJobID: JobID) =
+  {
+    val applicationsForThisJob: List[Printable] = AllApplications.applicationsForJob(aJobID)
+    aPrinter.printList(applicationsForThisJob, "\n")
+  }
+
+  def printApplicationsForEmployerAndDay(aPrinter: Printer, anEmployerID: EmployerID,aDay: Day) =
+  {
+    val applicationsForEmployerAndDay: List[Printable] = AllApplications.applicationsForEmployerAndDay(anEmployerID, aDay)
+    aPrinter.printList(applicationsForEmployerAndDay, "\n")
+  }
+
+  def printApplicationsForJobAndDay(aPrinter: Printer, aJobID: JobID, aDay: Day) =
+  {
+    aPrinter.printList(AllApplications.applicationsForJobAndDay(aJobID, aDay), "\n")
+  }
+
   def applyToATS(aJobID: JobID, aJobseeker: Jobseeker)
   {
     val anATS: ATS = (AllJobs.findByJobID(aJobID)).asInstanceOf[ATS]
     val newApplication: Application = anATS.createApplication(aJobseeker)
     aJobseeker.noteJobApplication(anATS)
-    AllApplications.add(newApplication)
+    addApplication(newApplication)
   }
 
   def applyToJReq(aJobID: JobID, aJobseeker: Jobseeker, aResume: Resume)
@@ -44,7 +62,7 @@ class TheLaddersData
     val aJReq: JReq = (AllJobs.findByJobID(aJobID)).asInstanceOf[JReq]
     val newApplication: Application = aJReq.createApplication(aJobseeker, aResume)
     aJobseeker.noteJobApplication(aJReq)
-    AllApplications.add(newApplication)
+    addApplication(newApplication)
   }
 
   private def addApplication(anApplication: application.Application)
@@ -54,6 +72,16 @@ class TheLaddersData
 
   def applicationsByEmployerID(anEmployerID: EmployerID) =
   {
- //   val findThisEmployerID = applicationByEmployerIDPredicate
+    AllApplications.applicationsForEmployer(anEmployerID)
+  }
+
+  def applicationsByJobID(aJobID: JobID) =
+  {
+    AllApplications.applicationsForJob(aJobID: JobID)
+  }
+
+  def printJobseekersWhoHaveAppliedOn(someDay: Day, aPrinter: Printer) =
+  {
+    aPrinter.printList(AllApplications.jobseekersWhoHaveAppliedOn(someDay), "\n")
   }
 }

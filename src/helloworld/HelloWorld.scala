@@ -73,36 +73,11 @@ object HelloWorld extends App {
     val job3: Job = new ATS(jobID3)
     theLaddersData.postJob(job3)
 
-//    jobID.print(pr)
-    /*
-    println("print one job")
-    job.print(pr)
-    println(); println()
-    */
-
 
     println("print all jobs for: " + employerID.toString())
     theLaddersData.printJobsForEmployer(pr, employerID)
     println(); println()
-/*
-    val someJobs = new Jobs()
-    someJobs.add(job3)
-    println("print someJobs")
-    someJobs.print(pr)
-    println(); println()
 
-    val seekerJobs = new JobseekerJobs()
-    seekerJobs.saveJob(job3)
-    println("print savedJobs from JobseekerJobs")
-    seekerJobs.printSavedJobs(pr)
-    println(); println()
-
-    val testInfo = new JobseekerInfo(new PersonalInfo("test JobseekerInfo"))
-    testInfo.saveJob(job3)
-    println("print savedJobs from JobseekerInfo")
-    testInfo.printSavedJobs(pr)
-    println(); println()
-*/
     // create Jobseeker and have Jobseeker save a Job
     val seekerID = new JobseekerID(new EmailAddress("dc@troll.org"))
     val seekerPersonalInfo = new PersonalInfo("Dick Cheney")
@@ -130,8 +105,25 @@ object HelloWorld extends App {
     println("d1 == d2: " + (d1 == d2))
     println(); println()
 
+    print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID2.print(pr); println("'")
+    theLaddersData.applyToATS(jobID2, seeker)
+    println(); println()
+
     print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID3.print(pr); println("'")
     theLaddersData.applyToATS(jobID3, seeker)
+    println(); println()
+
+    val seekerID2 = new JobseekerID(new EmailAddress("gw@smirk.tx"))
+    val seekerPersonalInfo2 = new PersonalInfo("Dubya")
+    val seekerInfo2 = new JobseekerInfo(seekerPersonalInfo2)
+    val seeker2 = new Jobseeker(seekerID2, seekerInfo2)
+
+    print("Jobseeker '" + seekerID2 + "' is applying to Job '");  jobID.print(pr); println("'")
+    theLaddersData.applyToATS(jobID, seeker2)
+    println(); println()
+
+    print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID.print(pr); println("'")
+    theLaddersData.applyToATS(jobID, seeker)
     println(); println()
 
     print("Jobseeker '" + seekerID + "'");  println("' has applied to these Jobs:")
@@ -141,7 +133,44 @@ object HelloWorld extends App {
     val ATS2: ATS = job2.asInstanceOf[ATS]
     val freeApp: Application = ATS2.createApplication(seeker)
 
-    print("Application by '"); seeker.print(pr); print("' to Job '"); ATS2.print(pr); println("'");
-    freeApp.print(pr); println
+    print("Application by Jobseeker '"); seeker.print(pr); print("' to Job '"); ATS2.print(pr); println("'")
+    freeApp.print(pr); println; println
+
+    print("Applications for Employer '"); employerID.print(pr); println("'")
+    pr.printList(theLaddersData.applicationsByEmployerID(employerID), "\n")
+    println; println
+
+    print("Applications for Employer '"); employerID2.print(pr); println("'")
+    pr.printList(theLaddersData.applicationsByEmployerID(employerID2), "\n")
+    println; println
+
+    print("Applications for Employer '"); employerID3.print(pr); println("'")
+    pr.printList(theLaddersData.applicationsByEmployerID(employerID3), "\n")
+    println; println
+
+    print("Applications for ");  print("Job '"); jobID.print(pr); println
+    theLaddersData.printApplicationsForJob(pr, jobID)
+    println; println
+
+    print("Applications for ");  print("Job '"); jobID2.print(pr); println
+    theLaddersData.printApplicationsForJob(pr, jobID2)
+    println; println
+
+    print("Applications for ");  print("Job '"); jobID3.print(pr); println
+    theLaddersData.printApplicationsForJob(pr, jobID3)
+    println; println
+
+    val today = new Today
+    print("Applications for Employer '"); employerID.print(pr); print("' on "); today.print(pr); println
+    theLaddersData.printApplicationsForEmployerAndDay(pr, employerID, today)
+    println; println
+
+    print("Applications for ");  print("Job '"); jobID2.print(pr); print("' on "); today.print(pr); println
+    theLaddersData.printApplicationsForJobAndDay(pr, jobID2, today)
+    println; println
+
+    println("Jobseekers that have applied today:")
+    theLaddersData.printJobseekersWhoHaveAppliedOn(today, pr)
+    println; println
   }
 }
