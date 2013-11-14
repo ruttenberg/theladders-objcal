@@ -2,6 +2,7 @@ package jobseeker
 
 import theLadders.{Printer, Printable}
 import job.{Job, JobID}
+import resume.ResumeID
 
 class Jobseeker (val theJobseekerID: JobseekerID, val theJobseekerInfo: JobseekerInfo) extends Printable
 {
@@ -29,4 +30,10 @@ class Jobseeker (val theJobseekerID: JobseekerID, val theJobseekerInfo: Jobseeke
   {
     theJobseekerInfo.printJobsAppliedTo(aPrinter)
   }
+
+  def matches(aResumeID: ResumeID) =
+  {
+    aResumeID.matches(theJobseekerID)
+  }
+
 }

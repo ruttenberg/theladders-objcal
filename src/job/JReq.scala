@@ -16,9 +16,11 @@ class JReq (val theJobID: JobID) extends Job
 {
   def createApplication(aJobseeker: Jobseeker, aResume: Resume) : Application =
   {
+    if (!aResume.matches(aJobseeker))
+      failedApplicationCount = failedApplicationCount + 1; throw new Exception("Resume does not belong to Jobseeker")
+
     val anApplicationID: ApplicationID = new ApplicationID(theJobID, aJobseeker)
     val today: Day = new Today
     new JReqApplication(anApplicationID, today, aResume)
   }
-
 }

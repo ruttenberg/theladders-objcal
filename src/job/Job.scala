@@ -15,7 +15,7 @@ import resume.Resume
 trait Job extends Printable
 {
   val theJobID: JobID
-  val failedApplicationCount: Int = 0
+  var failedApplicationCount: Int = 0
 
 //  def Job(aJobID: JobID)
 
@@ -24,11 +24,14 @@ trait Job extends Printable
     theJobID.print(thePrinter)
   }
 
-  def belongsToEmployer(anEmployerID: EmployerID) =
+  def belongsTo(anEmployerID: EmployerID) =
   {
-    theJobID.matchesEmployer(anEmployerID)
+    theJobID.matches(anEmployerID)
   }
 
-//  def createApplication(aJobseekerID: JobseekerID, aResume: Resume)
-//  def createApplication(aJobseekerID: JobseekerID)
+  def printFailedApplicationCount(aPrinter: Printer) =
+  {
+    aPrinter.printInt(failedApplicationCount)
+  }
+
 }

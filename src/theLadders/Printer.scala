@@ -13,4 +13,9 @@ trait Printer {
   {
     print(printableItem.toString())
   }
+
+  def printInt(anInt: Int) =
+  {
+    print(anInt)
+  }
 }

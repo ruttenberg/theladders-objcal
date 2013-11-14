@@ -18,7 +18,7 @@ class JobID ( val theEmployerID: EmployerID, val theJobNumber: JobNumber, val th
     aPrinter.printList(printList, '\t'.toString())
   }
 
-  def matchesEmployer(anEmployerID: EmployerID) =
+  def matches(anEmployerID: EmployerID) =
   {
     anEmployerID == theEmployerID
   }

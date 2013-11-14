@@ -9,7 +9,7 @@ class ApplicationID (val theJobID: JobID, val theJobseeker: Jobseeker) extends P
 {
   def isForThisEmployer(anEmployerID: EmployerID) =
   {
-    theJobID.matchesEmployer(anEmployerID)
+    theJobID.matches(anEmployerID)
   }
 
   def isForThisJob(aJobID: JobID) =

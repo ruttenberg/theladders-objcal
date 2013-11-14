@@ -1,6 +1,6 @@
 package resume
 
-class ResumeContent (val theResumeContent: ResumeContent)
+class ResumeContent (val theResumeContent: String)
 {
 
 }

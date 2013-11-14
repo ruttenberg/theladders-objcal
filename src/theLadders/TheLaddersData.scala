@@ -28,7 +28,7 @@ class TheLaddersData
 
   def printJobsForEmployer(aPrinter: Printer, anEmployerID: EmployerID)
   {
-    val jobsForThisEmployer : List[Job] = AllJobs.jobsForEmployer(anEmployerID)
+    val jobsForThisEmployer : List[Job] = AllJobs.jobsPostedBy(anEmployerID)
     aPrinter.printList(jobsForThisEmployer, "\n")
   }
 
@@ -60,9 +60,17 @@ class TheLaddersData
   def applyToJReq(aJobID: JobID, aJobseeker: Jobseeker, aResume: Resume)
   {
     val aJReq: JReq = (AllJobs.findByJobID(aJobID)).asInstanceOf[JReq]
-    val newApplication: Application = aJReq.createApplication(aJobseeker, aResume)
-    aJobseeker.noteJobApplication(aJReq)
-    addApplication(newApplication)
+
+    try
+    {
+      val newApplication = aJReq.createApplication(aJobseeker, aResume)
+      aJobseeker.noteJobApplication(aJReq)
+      addApplication(newApplication)
+    }
+    catch
+    {
+      case  _: Throwable => ;
+    }
   }
 
   private def addApplication(anApplication: application.Application)
@@ -83,5 +91,20 @@ class TheLaddersData
   def printJobseekersWhoHaveAppliedOn(someDay: Day, aPrinter: Printer) =
   {
     aPrinter.printList(AllApplications.jobseekersWhoHaveAppliedOn(someDay), "\n")
+  }
+
+  def printNumberOfFailedApplicationsFor(aJob: Job, aPrinter: Printer) =
+  {
+    aJob.printFailedApplicationCount(aPrinter: Printer)
+  }
+  
+  def printNumberOfSuccessfulApplicationsFor(aJob: Job, aPrinter: Printer) =
+  {
+    AllApplications.printNumberOfSuccessfulApplicationsFor(aJob, aPrinter)
+  }
+
+  def printNumberOfFailedApplicationsForJobsPostedBy(anEmployerID: EmployerID, aPrinter: Printer) =
+  {
+    AllJobs.printNumberOfFailedApplicationsForJobsPostedBy(anEmployerID, aPrinter)
   }
 }

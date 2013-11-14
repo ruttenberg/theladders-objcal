@@ -6,6 +6,7 @@ import job._
 import jobseeker._
 import application.day.Today
 import application.Application
+import resume.{ResumeContent, ResumeID, ResumeName, Resume}
 
 /**
  * Created with IntelliJ IDEA.
@@ -85,6 +86,22 @@ object HelloWorld extends App {
     val seeker = new Jobseeker(seekerID, seekerInfo)
     seeker.saveJob(job3)
 
+    val seekerID2 = new JobseekerID(new EmailAddress("gw@smirk.tx"))
+    val seekerPersonalInfo2 = new PersonalInfo("Dubya")
+    val seekerInfo2 = new JobseekerInfo(seekerPersonalInfo2)
+    val seeker2 = new Jobseeker(seekerID2, seekerInfo2)
+
+    val resumeName = new ResumeName("Dick done it")
+    val resumeID = new ResumeID(resumeName, seekerID)
+    val resumeContent = new ResumeContent("shotgun blast to face")
+    val resume = new Resume(resumeID, resumeContent)
+
+    val jobNumber4: JobNumber = new JobNumber(309)
+    val jobTitle4: JobTitle = new JobTitle("Never Confirmed by Senate")
+    val jobID4: JobID = new JobID(employerID, jobNumber4, jobTitle4)
+    val job4: Job = new JReq(jobID4)
+    theLaddersData.postJob(job4)
+
     println("print saved jobs for: " + seekerID.toString())
     seeker.printSavedJobs(pr)
     println(); println()
@@ -112,11 +129,6 @@ object HelloWorld extends App {
     print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID3.print(pr); println("'")
     theLaddersData.applyToATS(jobID3, seeker)
     println(); println()
-
-    val seekerID2 = new JobseekerID(new EmailAddress("gw@smirk.tx"))
-    val seekerPersonalInfo2 = new PersonalInfo("Dubya")
-    val seekerInfo2 = new JobseekerInfo(seekerPersonalInfo2)
-    val seeker2 = new Jobseeker(seekerID2, seekerInfo2)
 
     print("Jobseeker '" + seekerID2 + "' is applying to Job '");  jobID.print(pr); println("'")
     theLaddersData.applyToATS(jobID, seeker2)
@@ -171,6 +183,23 @@ object HelloWorld extends App {
 
     println("Jobseekers that have applied today:")
     theLaddersData.printJobseekersWhoHaveAppliedOn(today, pr)
+    println; println
+
+    println("W tries to apply for a job with DC's resume:")
+    theLaddersData.applyToJReq(jobID4, seeker2, resume)
+    print("failedApplicationCount for '"); jobID4.print(pr); print("' "); job4.printFailedApplicationCount(pr)
+    println; println
+
+    print("Jobseeker '" + seekerID2 + "'");  println("' has applied to these Jobs:")
+    seeker2.printJobsAppliedTo(pr)
+    println; println
+
+    print("successful Applications for '"); job.print(pr); println("':")
+    theLaddersData.printNumberOfSuccessfulApplicationsFor(job, pr)
+    println; println
+
+    print("total Application failures for Jobs posted by '"); employerID.print(pr); println("': ")
+    theLaddersData.printNumberOfFailedApplicationsForJobsPostedBy(employerID, pr)
     println; println
   }
 }

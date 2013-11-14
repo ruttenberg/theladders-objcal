@@ -2,7 +2,7 @@ package jobseeker
 
 import theLadders.{Identity, Printer, Printable}
 
-class JobseekerID (theIdentity: Identity) extends Printable
+class JobseekerID (val theIdentity: Identity) extends Printable
 {
   override def print(aPrinter: Printer) =
   {
@@ -12,5 +12,13 @@ class JobseekerID (theIdentity: Identity) extends Printable
   override def toString() =
   {
     theIdentity.toString()
+  }
+
+  override def equals(other: Any) =
+  {
+    val that = other.asInstanceOf[JobseekerID]
+    if (that == null) false
+    else
+      that.theIdentity == theIdentity
   }
 }

@@ -24,7 +24,7 @@ class Jobs extends Printable
     theJobs = aJob :: theJobs
   }
 
-  def jobsForEmployer(anEmployerID: EmployerID) =
+  def jobsPostedBy(anEmployerID: EmployerID) =
   {
     val findJobByEmployer = predicate.jobByEmployerIDPredicate(anEmployerID)
 
@@ -35,5 +35,17 @@ class Jobs extends Printable
   {
     val findJobByJobID = predicate.jobByJobIDPredicate(aJobID)
     theJobs.filter(findJobByJobID).head
+  }
+
+  def printNumberOfFailedApplicationsForJobsPostedBy(anEmployerID: EmployerID, aPrinter: Printer) =
+  {
+    val jobs: List[Job] = jobsPostedBy(anEmployerID)
+
+    def jobToFailureCount(aJob: Job) =
+    {
+      aJob.failedApplicationCount
+    }
+
+    aPrinter.printInt(jobs.map(jobToFailureCount).sum)
   }
 }

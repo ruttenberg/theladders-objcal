@@ -1,9 +1,10 @@
 package application
 
 import employer.EmployerID
-import job.JobID
+import job.{Job, JobID}
 import application.day.Day
 import jobseeker.Jobseeker
+import theLadders.Printer
 
 class Applications
 {
@@ -69,5 +70,11 @@ class Applications
   {
     val findApplicationsByDay = predicate.applicationByDayPredicate(aDay)
     theApplications.filter(findApplicationsByDay)
+  }
+
+  def printNumberOfSuccessfulApplicationsFor(aJob: Job, aPrinter: Printer) =
+  {
+    val successCount = applicationsForJob(aJob.theJobID).size
+    aPrinter.printInt(successCount)
   }
 }

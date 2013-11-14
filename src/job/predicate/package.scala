@@ -12,7 +12,7 @@ import employer.{EmployerID, Employer}
 package object predicate
 {
   def jobByEmployerIDPredicate(anEmployerID: EmployerID) =
-    (aJob: Job) => aJob.belongsToEmployer(anEmployerID)
+    (aJob: Job) => aJob.belongsTo(anEmployerID)
 
   def jobByJobIDPredicate(aJobID: JobID) =
     (aJob: Job) => aJob.theJobID == aJobID
