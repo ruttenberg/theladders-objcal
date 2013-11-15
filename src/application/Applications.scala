@@ -1,6 +1,6 @@
 package application
 
-import employer.EmployerID
+import employer.Employer
 import job.{Job, JobID}
 import application.day.Day
 import jobseeker.Jobseeker
@@ -15,9 +15,9 @@ class Applications
     theApplications = anApplication :: theApplications
   }
 
-  def applicationsForEmployer(anEmployerID: EmployerID) : List[Application] =
+  def applicationsForJobsPostedBy(anEmployer: Employer) : List[Application] =
   {
-    val findApplicationByEmployer = predicate.applicationByEmployerIDPredicate(anEmployerID)
+    val findApplicationByEmployer = predicate.applicationByEmployerIDPredicate(anEmployer)
 
     theApplications.filter(findApplicationByEmployer)
   }
@@ -29,9 +29,9 @@ class Applications
     theApplications.filter(findApplicationsByJob)
   }
 
-  def applicationsForEmployerAndDay(anEmployerID: EmployerID, aDay: Day) : List[Application] =
+  def applicationsForEmployerAndDay(anEmployer: Employer, aDay: Day) : List[Application] =
   {
-    val findApplicationByEmployer = predicate.applicationByEmployerIDPredicate(anEmployerID)
+    val findApplicationByEmployer = predicate.applicationByEmployerIDPredicate(anEmployer)
     val findApplicationsByDay = predicate.applicationByDayPredicate(aDay)
 
     theApplications.filter(findApplicationsByDay).filter(findApplicationByEmployer)
@@ -76,5 +76,10 @@ class Applications
   {
     val successCount = applicationsForJob(aJob.theJobID).size
     aPrinter.printInt(successCount)
+  }
+
+  def printNumberOfSuccessfulApplicationsForJobsPostedBy(anEmployer: Employer, aPrinter: Printer) =
+  {
+    aPrinter.printInt(applicationsForJobsPostedBy(anEmployer).size)
   }
 }

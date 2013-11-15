@@ -1,6 +1,6 @@
 package theLadders
 
-import employer.{EmployerID, Employers}
+import employer.{Employer, Employers}
 import job._
 import application.Applications
 import application.Application
@@ -26,9 +26,9 @@ class TheLaddersData
     AllJobs.add(aJob)
   }
 
-  def printJobsForEmployer(aPrinter: Printer, anEmployerID: EmployerID)
+  def printJobsForEmployer(aPrinter: Printer, anEmployer: Employer)
   {
-    val jobsForThisEmployer : List[Job] = AllJobs.jobsPostedBy(anEmployerID)
+    val jobsForThisEmployer : List[Job] = AllJobs.jobsPostedBy(anEmployer)
     aPrinter.printList(jobsForThisEmployer, "\n")
   }
 
@@ -38,9 +38,9 @@ class TheLaddersData
     aPrinter.printList(applicationsForThisJob, "\n")
   }
 
-  def printApplicationsForEmployerAndDay(aPrinter: Printer, anEmployerID: EmployerID,aDay: Day) =
+  def printApplicationsForEmployerAndDay(aPrinter: Printer, anEmployer: Employer,aDay: Day) =
   {
-    val applicationsForEmployerAndDay: List[Printable] = AllApplications.applicationsForEmployerAndDay(anEmployerID, aDay)
+    val applicationsForEmployerAndDay: List[Printable] = AllApplications.applicationsForEmployerAndDay(anEmployer, aDay)
     aPrinter.printList(applicationsForEmployerAndDay, "\n")
   }
 
@@ -78,9 +78,9 @@ class TheLaddersData
     AllApplications.add(anApplication)
   }
 
-  def applicationsByEmployerID(anEmployerID: EmployerID) =
+  def applicationsForJobsPostedBy(anEmployer: Employer) =
   {
-    AllApplications.applicationsForEmployer(anEmployerID)
+    AllApplications.applicationsForJobsPostedBy(anEmployer)
   }
 
   def applicationsByJobID(aJobID: JobID) =
@@ -103,8 +103,13 @@ class TheLaddersData
     AllApplications.printNumberOfSuccessfulApplicationsFor(aJob, aPrinter)
   }
 
-  def printNumberOfFailedApplicationsForJobsPostedBy(anEmployerID: EmployerID, aPrinter: Printer) =
+  def printNumberOfFailedApplicationsForJobsPostedBy(anEmployer: Employer, aPrinter: Printer) =
   {
-    AllJobs.printNumberOfFailedApplicationsForJobsPostedBy(anEmployerID, aPrinter)
+    AllJobs.printNumberOfFailedApplicationsForJobsPostedBy(anEmployer, aPrinter)
+  }
+
+  def printNumberOfSuccessfulApplicationsForJobsPostedBy(anEmployer: Employer, aPrinter: Printer) =
+  {
+    AllApplications.printNumberOfSuccessfulApplicationsForJobsPostedBy(anEmployer: Employer, aPrinter: Printer)
   }
 }

@@ -12,8 +12,8 @@ class PersonalInfo (theName: String) extends Printable
     aPrinter.printItem(this)
   }
 
-  override def toString() =
+  override def toString =
   {
-    theName.toString()
+    theName.toString
   }
 }

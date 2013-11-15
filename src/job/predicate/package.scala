@@ -1,6 +1,6 @@
 package job
 
-import employer.{EmployerID, Employer}
+import employer.{Employer}
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,8 +11,8 @@ import employer.{EmployerID, Employer}
  */
 package object predicate
 {
-  def jobByEmployerIDPredicate(anEmployerID: EmployerID) =
-    (aJob: Job) => aJob.belongsTo(anEmployerID)
+  def jobByEmployerIDPredicate(anEmployer: Employer) =
+    (aJob: Job) => aJob.belongsTo(anEmployer)
 
   def jobByJobIDPredicate(aJobID: JobID) =
     (aJob: Job) => aJob.theJobID == aJobID

@@ -9,9 +9,9 @@ package theLadders
  */
 class EmailAddress(val theAddress: String) extends Identity
 {
-  final override def toString() =
+  override def toString() =
   {
-    theAddress.toString()
+    theAddress
   }
 
   override def equals(other: Any) =

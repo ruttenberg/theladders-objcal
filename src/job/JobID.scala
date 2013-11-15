@@ -1,6 +1,6 @@
 package job
 
-import employer.EmployerID
+import employer.Employer
 import theLadders.{Printable, Printer}
 
 /**
@@ -10,17 +10,22 @@ import theLadders.{Printable, Printer}
  * Time: 11:04 AM
  * To change this template use File | Settings | File Templates.
  */
-class JobID ( val theEmployerID: EmployerID, val theJobNumber: JobNumber, val theJobTitle: JobTitle ) extends Printable
+class JobID ( val theEmployer: Employer, val theJobNumber: JobNumber, val theJobTitle: JobTitle ) extends Printable
 {
   override def print(aPrinter: Printer) =
   {
-    val printList: List[Printable] =  List(theEmployerID, theJobTitle, theJobNumber)
-    aPrinter.printList(printList, '\t'.toString())
+    val printList: List[Printable] =  List(theEmployer, theJobTitle, theJobNumber)
+    aPrinter.printList(printList, '\t'.toString)
   }
 
-  def matches(anEmployerID: EmployerID) =
+  def printTitleAndEmployerName(aPrinter: Printer) =
   {
-    anEmployerID == theEmployerID
+    aPrinter.printList(List(theJobTitle, theEmployer), '\t'.toString)
+  }
+
+  def matches(anEmployer: Employer) =
+  {
+    anEmployer == theEmployer
   }
 
   override def equals(other: Any) =
@@ -28,6 +33,6 @@ class JobID ( val theEmployerID: EmployerID, val theJobNumber: JobNumber, val th
     val that = other.asInstanceOf[JobID]
     if (that == null) false
     else
-      that.theEmployerID == theEmployerID && that.theJobNumber == theJobNumber && that.theJobTitle == theJobTitle
+      that.theEmployer == theEmployer && that.theJobNumber == theJobNumber && that.theJobTitle == theJobTitle
   }
 }

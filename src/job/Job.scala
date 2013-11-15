@@ -1,7 +1,7 @@
 package job
 
 import theLadders.{Printer, Printable}
-import employer.EmployerID
+import employer.Employer
 import jobseeker.JobseekerID
 import resume.Resume
 
@@ -19,14 +19,14 @@ trait Job extends Printable
 
 //  def Job(aJobID: JobID)
 
-  override def print(thePrinter: Printer) =
+  override def print(aPrinter: Printer) =
   {
-    theJobID.print(thePrinter)
+    theJobID.printTitleAndEmployerName(aPrinter)
   }
 
-  def belongsTo(anEmployerID: EmployerID) =
+  def belongsTo(anEmployer: Employer) =
   {
-    theJobID.matches(anEmployerID)
+    theJobID.matches(anEmployer)
   }
 
   def printFailedApplicationCount(aPrinter: Printer) =

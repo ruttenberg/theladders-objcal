@@ -1,15 +1,15 @@
 package application
 
 import job.JobID
-import jobseeker.{Jobseeker, JobseekerID}
-import employer.EmployerID
+import jobseeker.{Jobseeker}
+import employer.Employer
 import theLadders.{Printer, Printable}
 
 class ApplicationID (val theJobID: JobID, val theJobseeker: Jobseeker) extends Printable
 {
-  def isForThisEmployer(anEmployerID: EmployerID) =
+  def isForThisEmployer(anEmployer: Employer) =
   {
-    theJobID.matches(anEmployerID)
+    theJobID.matches(anEmployer)
   }
 
   def isForThisJob(aJobID: JobID) =

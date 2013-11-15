@@ -1,7 +1,7 @@
 package application
 
 import application.day.Day
-import employer.EmployerID
+import employer.Employer
 import theLadders.{Printable, Printer}
 import job.JobID
 
@@ -10,7 +10,7 @@ trait Application extends Printable
   val theApplicationID: ApplicationID
   val theDay: Day
 
-  def isForThisEmployer(anEmployerID: EmployerID) =
+  def isForThisEmployer(anEmployerID: Employer) =
   {
     theApplicationID.isForThisEmployer(anEmployerID)
   }

@@ -1,6 +1,6 @@
 package job
 
-import employer.EmployerID
+import employer.Employer
 import theLadders.{Printer, Printable}
 
 /**
@@ -24,7 +24,7 @@ class Jobs extends Printable
     theJobs = aJob :: theJobs
   }
 
-  def jobsPostedBy(anEmployerID: EmployerID) =
+  def jobsPostedBy(anEmployerID: Employer) =
   {
     val findJobByEmployer = predicate.jobByEmployerIDPredicate(anEmployerID)
 
@@ -37,7 +37,7 @@ class Jobs extends Printable
     theJobs.filter(findJobByJobID).head
   }
 
-  def printNumberOfFailedApplicationsForJobsPostedBy(anEmployerID: EmployerID, aPrinter: Printer) =
+  def printNumberOfFailedApplicationsForJobsPostedBy(anEmployerID: Employer, aPrinter: Printer) =
   {
     val jobs: List[Job] = jobsPostedBy(anEmployerID)
 
@@ -48,4 +48,5 @@ class Jobs extends Printable
 
     aPrinter.printInt(jobs.map(jobToFailureCount).sum)
   }
+
 }

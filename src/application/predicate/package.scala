@@ -1,12 +1,12 @@
 package application
 
-import employer.EmployerID
+import employer.Employer
 import job.JobID
 import application.day.Day
 
 package object predicate
 {
-  def applicationByEmployerIDPredicate(anEmployerID: EmployerID) =
+  def applicationByEmployerIDPredicate(anEmployerID: Employer) =
     (anApplication: Application) => anApplication.isForThisEmployer(anEmployerID)
 
   def applicationByJobIDPredicate(aJobID: JobID) =
