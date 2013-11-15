@@ -13,6 +13,6 @@ class PrintableString ( val theString: String  ) extends Printable {
     thePrinter.printItem(this)
   }
 
-  override def toString() = theString
+  override def toString = theString
 
 }

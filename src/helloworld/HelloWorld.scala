@@ -94,6 +94,11 @@ object HelloWorld extends App {
     val seekerInfo3 = new JobseekerInfo(seekerPersonalInfo3)
     val seeker3 = new Jobseeker(seekerID3, seekerInfo3)
 
+    val imposterID = new JobseekerID(new EmailAddress("spoofgw@smirk.tx"))
+    val imposterPersonalInfo = new PersonalInfo("Dubya")
+    val imposterInfo = new JobseekerInfo(imposterPersonalInfo)
+    val imposter = new Jobseeker(imposterID, imposterInfo)
+
     val resumeName = new ResumeName("Dick done it")
     val resumeID = new ResumeID(resumeName, seekerID)
     val resumeContent = new ResumeContent("shotgun blast to face")
@@ -115,10 +120,12 @@ object HelloWorld extends App {
     println("Today: " + new Today)
     println(); println()
 
+    /*
     val d1 = new Today
     val d2 = new Today
     println("d1 == d2: " + (d1 == d2))
     println(); println()
+    */
 
     print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID2.print(pr); println("'")
     theLaddersData.applyToATS(jobID2, seeker)
@@ -130,6 +137,10 @@ object HelloWorld extends App {
 
     print("Jobseeker '" + seekerID2 + "' is applying to Job '");  jobID.print(pr); println("'")
     theLaddersData.applyToATS(jobID, seeker2)
+    println(); println()
+
+    print("Jobseeker '" + imposterID + "' is applying to Job '");  jobID.print(pr); println("'")
+    theLaddersData.applyToATS(jobID, imposter)
     println(); println()
 
     print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID.print(pr); println("'")
@@ -158,15 +169,15 @@ object HelloWorld extends App {
     pr.printList(theLaddersData.applicationsForJobsPostedBy(employer3), "\n")
     println; println
 
-    print("Applications for ");  print("Job '"); jobID.print(pr); println
+    print("Applications for ");  print("Job '"); jobID.print(pr); println("'")
     theLaddersData.printApplicationsForJob(pr, jobID)
     println; println
 
-    print("Applications for ");  print("Job '"); jobID2.print(pr); println
+    print("Applications for ");  print("Job '"); jobID2.print(pr); println("'")
     theLaddersData.printApplicationsForJob(pr, jobID2)
     println; println
 
-    print("Applications for ");  print("Job '"); jobID3.print(pr); println
+    print("Applications for ");  print("Job '"); jobID3.print(pr); println("'")
     theLaddersData.printApplicationsForJob(pr, jobID3)
     println; println
 

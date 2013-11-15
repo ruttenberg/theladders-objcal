@@ -1,5 +1,7 @@
 package employer
 
+import theLadders.Printable
+
 /**
  * Created with IntelliJ IDEA.
  * User: jpr
@@ -7,6 +9,6 @@ package employer
  * Time: 10:15 AM
  * To change this template use File | Settings | File Templates.
  */
-class Employers {
+class Employers extends Printable {
 
 }

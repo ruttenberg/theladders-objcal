@@ -112,4 +112,9 @@ class TheLaddersData
   {
     AllApplications.printNumberOfSuccessfulApplicationsForJobsPostedBy(anEmployer: Employer, aPrinter: Printer)
   }
+
+  def printAllEmployers(aPrinter: Printer) =
+  {
+    AllEmployers.print(aPrinter)
+  }
 }
