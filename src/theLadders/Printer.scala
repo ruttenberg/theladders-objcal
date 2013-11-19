@@ -11,7 +11,7 @@ trait Printer {
   def printList(listOfPrintables: List[Printable], separator: String)
   def printItem(printableItem: Printable) =
   {
-    print(printableItem.toString())
+    print(printableItem.toString)
   }
 
   def printInt(anInt: Int) =

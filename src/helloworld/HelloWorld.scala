@@ -1,6 +1,6 @@
 package helloworld
 
-import theLadders.{TheLaddersData, EmailAddress, ConsolePrinter, PrintableString}
+import theLadders._
 import employer.{EmployerName, EmployerInfo, EmployerID, Employer}
 import job._
 import jobseeker._
@@ -38,38 +38,38 @@ object HelloWorld extends App {
     val jobNumber: JobNumber = new JobNumber(99)
     val jobTitle: JobTitle = new JobTitle("Lord and Master")
     val jobID: JobID = new JobID(employer, jobNumber, jobTitle)
-    val job: Job = new ATS(jobID)
+    val job = new ATS(jobID)
     theLaddersData.postJob(job)
 
     val jobNumber2: JobNumber = new JobNumber(5)
     val jobTitle2: JobTitle = new JobTitle("VP of Mendacity")
     val jobID2: JobID = new JobID(employer2, jobNumber2, jobTitle2)
-    val job2: Job = new ATS(jobID2)
+    val job2 = new ATS(jobID2)
     theLaddersData.postJob(job2)
 
     // same employer as first job
     val jobNumber3: JobNumber = new JobNumber(37)
     val jobTitle3: JobTitle = new JobTitle("VP of Mendacity")
     val jobID3: JobID = new JobID(employer, jobNumber3, jobTitle3)
-    val job3: Job = new ATS(jobID3)
+    val job3 = new ATS(jobID3)
     theLaddersData.postJob(job3)
 
     val jobNumber4: JobNumber = new JobNumber(309)
     val jobTitle4: JobTitle = new JobTitle("Never Confirmed by Senate")
     val jobID4: JobID = new JobID(employer, jobNumber4, jobTitle4)
-    val job4: Job = new JReq(jobID4)
+    val job4 = new JReq(jobID4)
     theLaddersData.postJob(job4)
 
     val jobNumber5: JobNumber = new JobNumber(38)
     val jobTitle5: JobTitle = new JobTitle("killer of darlings")
     val jobID5: JobID = new JobID(employer, jobNumber5, jobTitle5)
-    val job5: Job = new JReq(jobID5)
+    val job5 = new JReq(jobID5)
     theLaddersData.postJob(job5)
 
     val jobNumber6: JobNumber = new JobNumber(39)
     val jobTitle6: JobTitle = new JobTitle("tea party animal")
     val jobID6: JobID = new JobID(employer, jobNumber6, jobTitle6)
-    val job6: Job = new JReq(jobID6)
+    val job6 = new JReq(jobID6)
     theLaddersData.postJob(job6)
 
 
@@ -127,24 +127,24 @@ object HelloWorld extends App {
     println(); println()
     */
 
-    print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID2.print(pr); println("'")
-    theLaddersData.applyToATS(jobID2, seeker)
+    print("Jobseeker '" + seekerID + "' is applying to Job '");  job2.print(pr); println("'")
+    theLaddersData.applyToATS(job2, seeker)
     println(); println()
 
     print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID3.print(pr); println("'")
-    theLaddersData.applyToATS(jobID3, seeker)
+    theLaddersData.applyToATS(job3, seeker)
     println(); println()
 
     print("Jobseeker '" + seekerID2 + "' is applying to Job '");  jobID.print(pr); println("'")
-    theLaddersData.applyToATS(jobID, seeker2)
+    theLaddersData.applyToATS(job, seeker2)
     println(); println()
 
     print("Jobseeker '" + imposterID + "' is applying to Job '");  jobID.print(pr); println("'")
-    theLaddersData.applyToATS(jobID, imposter)
+    theLaddersData.applyToATS(job, imposter)
     println(); println()
 
     print("Jobseeker '" + seekerID + "' is applying to Job '");  jobID.print(pr); println("'")
-    theLaddersData.applyToATS(jobID, seeker)
+    theLaddersData.applyToATS(job, seeker)
     println(); println()
 
     print("Jobseeker '" + seekerID + "'");  println("' has applied to these Jobs:")
@@ -173,7 +173,7 @@ object HelloWorld extends App {
     theLaddersData.printApplicationsForJob(pr, jobID)
     println; println
 
-    print("Applications for ");  print("Job '"); jobID2.print(pr); println("'")
+    print("Applications for ");  print("Job '"); job2.print(pr); println("'")
     theLaddersData.printApplicationsForJob(pr, jobID2)
     println; println
 
@@ -195,17 +195,17 @@ object HelloWorld extends App {
     println; println
 
     println("W tries to apply for a job with DC's resume:")
-    theLaddersData.applyToJReq(jobID4, seeker2, resume)
+    theLaddersData.applyToJReq(job4, seeker2, resume)
     print("failedApplicationCount for '"); jobID4.print(pr); print("' "); job4.printFailedApplicationCount(pr)
     println; println
 
     println("W tries second time to apply for a job with DC's resume:")
-    theLaddersData.applyToJReq(jobID4, seeker2, resume)
+    theLaddersData.applyToJReq(job4, seeker2, resume)
     print("failedApplicationCount for '"); jobID4.print(pr); print("' "); job4.printFailedApplicationCount(pr)
     println; println
 
     println("Rummy tries to apply for a job with DC's resume:")
-    theLaddersData.applyToJReq(jobID6, seeker3, resume)
+    theLaddersData.applyToJReq(job6, seeker3, resume)
     print("failedApplicationCount for '"); jobID6.print(pr); print("' "); job6.printFailedApplicationCount(pr)
     println; println
 
@@ -228,5 +228,16 @@ object HelloWorld extends App {
     print("total successful Applications for Jobs posted by '"); employer.print(pr); println("': ")
     theLaddersData.printNumberOfSuccessfulApplicationsForJobsPostedBy(employer, pr)
     println; println
+
+
+    val ID1: Identity = new EmailAddress("a@b.org")
+    val ID2: Identity = new EmailAddress("a@b.org")
+
+    println("ID1 == ID2: " + (ID1 == ID2))
+
+    val rmatch = resume.matches(seeker)
+    println("rmatch: " + rmatch)
+
+    job4.createApplication(seeker, resume)
   }
 }

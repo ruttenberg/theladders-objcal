@@ -49,18 +49,15 @@ class TheLaddersData
     aPrinter.printList(AllApplications.applicationsForJobAndDay(aJobID, aDay), "\n")
   }
 
-  def applyToATS(aJobID: JobID, aJobseeker: Jobseeker)
+  def applyToATS(anATS: ATS, aJobseeker: Jobseeker)
   {
-    val anATS: ATS = (AllJobs.findByJobID(aJobID)).asInstanceOf[ATS]
     val newApplication: Application = anATS.createApplication(aJobseeker)
     aJobseeker.noteJobApplication(anATS)
     addApplication(newApplication)
   }
 
-  def applyToJReq(aJobID: JobID, aJobseeker: Jobseeker, aResume: Resume)
+  def applyToJReq(aJReq: JReq, aJobseeker: Jobseeker, aResume: Resume)
   {
-    val aJReq: JReq = (AllJobs.findByJobID(aJobID)).asInstanceOf[JReq]
-
     try
     {
       val newApplication = aJReq.createApplication(aJobseeker, aResume)

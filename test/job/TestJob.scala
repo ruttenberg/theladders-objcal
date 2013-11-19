@@ -1,8 +1,8 @@
 package job
 
-import org.scalatest.{BeforeAndAfterAll, Matchers, GivenWhenThen, FeatureSpec}
+import org.scalatest.{Matchers, GivenWhenThen, FeatureSpec}
 import employer.{EmployerName, EmployerInfo, EmployerID, Employer}
-import theLadders.EmailAddress
+import theLadders.{ConsolePrinter, EmailAddress}
 
 class TestJob extends FeatureSpec
   with GivenWhenThen
@@ -13,36 +13,63 @@ class TestJob extends FeatureSpec
 
   feature("Job")
   {
+    val anATSID = new JobID(anEmployer, new JobNumber(7), new JobTitle("fooATS"))
+    val fooATS = new ATS(anATSID)
+
     scenario("create ATS")
     {
-      val aJobID = new JobID(anEmployer, new JobNumber(7), new JobTitle("fooJob"))
-      val fooJob = new ATS(aJobID)
-      Given("ATS created with JobTitle of fooJob")
+      Given("ATS created with JobTitle of fooATS")
 
-      val expect = "fooJob"
-      val jobName = fooJob.theJobID.theJobTitle.toString
+      val expect = "fooATS"
+      val jobName = fooATS.theJobID.theJobTitle.toString
 
       Then("the ATS's JobTitle is " + expect)
       jobName should be(expect)
     }
+
+    val aJReqID = new JobID(anEmployer, new JobNumber(7), new JobTitle("fooJReq"))
+    val fooJReq = new JReq(aJReqID)
     scenario("create JReq")
     {
-      val aJobID = new JobID(anEmployer, new JobNumber(7), new JobTitle("fooJReq"))
-      val fooJob = new JReq(aJobID)
       Given("JReq created with JobTitle of fooJReq")
 
       val expect = "fooJReq"
-      val jobName = fooJob.theJobID.theJobTitle.toString
+      val jobName = fooJReq.theJobID.theJobTitle.toString
 
       Then("the JReq's JobTitle is " + expect)
       jobName should be(expect)
     }
-  }
 
-/*
-  override def beforeAll()
-  {
-  }
-  */
+    scenario("print ATS")
+    {
+      Given("ATS created with JobTitle of fooATS and EmployerName of FooCorp")
 
+      When("ATS.print is called")
+      val result = new java.io.ByteArrayOutputStream()
+      Console.withOut(result)
+      {
+        fooATS.print(new ConsolePrinter)
+      }
+
+      val expect = "fooATS" + '\t'.toString + "FooCorp"
+      Then("the Job prints as " + expect)
+      result.toString should be(expect)
+    }
+
+    scenario("print JReq")
+    {
+      Given("JReq created with JobTitle of fooJReq and EmployerName of FooCorp")
+
+      When("JReq.print is called")
+      val result = new java.io.ByteArrayOutputStream()
+      Console.withOut(result)
+      {
+        fooJReq.print(new ConsolePrinter)
+      }
+
+      val expect = "fooJReq" + '\t'.toString + "FooCorp"
+      Then("the Job prints as " + expect)
+      result.toString should be(expect)
+    }
+  }
 }

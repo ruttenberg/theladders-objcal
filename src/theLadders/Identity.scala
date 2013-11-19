@@ -13,6 +13,4 @@ trait Identity extends Printable
   {
     thePrinter.printItem(this)
   }
-
-  override def equals(other: Any) : Boolean
 }
